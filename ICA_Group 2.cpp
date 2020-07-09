@@ -20,7 +20,7 @@ class Shape {
 
         //Outputs type of shape, virtual function
         string getType() {
-            return this->type;
+            return type;
         }
 
         //Returns id of shape
@@ -69,28 +69,24 @@ class ShapeCache {
 
     public:
         void getShape() {
-            //Produces error
-            for(int i = 0; i < shapeMap.size(); i++){
+            for(int i = 0; i < (int)shapeMap.size(); i++){
                 cout << shapeMap[i]->getType();
             }
-            
         }
 
         void loadCache(){
-            Rectangle rect;
-            Circle circ;
-            Square square;
+            Rectangle* rect = new Rectangle();
+            Circle* circ = new Circle();
+            Square* square = new Square();
 
-            rect.type = "Rectangle";
-            circ.type = "Circle";
-            square.type = "Square";
+            rect->type = "Rectangle";
+            circ->type = "Circle";
+            square->type = "Square";
             
-           shapeMap.push_back(&rect);
-           shapeMap.push_back(&circ);
-           shapeMap.push_back(&square);
+           shapeMap.push_back(rect);
+           shapeMap.push_back(circ);
+           shapeMap.push_back(square);
 
-            
-           // cout << shapeMap[0] << endl;
         }
 };
 
