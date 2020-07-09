@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using std::cout;
 using std::endl;
@@ -68,10 +67,14 @@ class ShapeCache {
         vector<Shape*> shapeMap;
 
     public:
-        void getShape() {
-            for(int i = 0; i < (int)shapeMap.size(); i++){
-                cout << shapeMap[i]->getType();
+        Shape* getShape(string shapeToFind) {
+            for(int i = 0; i < (int)shapeMap.size(); i++) {
+                if( shapeMap[i]->getType() == shapeToFind ) {
+                    return shapeMap[i]->clone();
+                }
             }
+            cout << "Shape not found: " << shapeToFind << endl;
+            return 0;
         }
 
         void loadCache(){
@@ -97,7 +100,16 @@ int main() {
 
     //Loads the cache with arbitrary shapes
     shapeCache.loadCache();
-    shapeCache.getShape();
+    
+    //Gets a clone of an object
+    Shape* circ = shapeCache.getShape("Circle");
+    Shape* rect = shapeCache.getShape("Rectangle");
+    Shape* sqr = shapeCache.getShape("Square");
+
+    //Prints out the clones
+    cout << circ->getType() << endl;
+    cout << rect->getType() << endl;
+    cout << sqr->getType() << endl;
 
     return EXIT_SUCCESS;
 }
